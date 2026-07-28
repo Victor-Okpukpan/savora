@@ -223,6 +223,32 @@ export function MoonIcon({ className = base }: IconProps) {
   );
 }
 
+export function MenuIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M4 6h16M4 12h16M4 18h16"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function CloseIcon({ className = base }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M6 6l12 12M18 6L6 18"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon({ className = "h-4 w-4" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
