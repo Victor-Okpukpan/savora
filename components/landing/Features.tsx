@@ -42,13 +42,13 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="bg-savora-white py-20">
+    <section id="features" className="bg-background py-20">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-savora-dark sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             Everything a Savings Circle Needs
           </h2>
-          <p className="mt-4 text-lg text-savora-dark/70">
+          <p className="mt-4 text-lg text-foreground/70">
             Built for the way community savings already works — just made
             trustless and transparent.
           </p>
@@ -58,16 +58,16 @@ export function Features() {
           {features.map(({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className="flex items-start gap-4 rounded-2xl border border-black/5 bg-savora-white p-6 shadow-sm"
+              className="flex items-start gap-4 rounded-2xl border border-foreground/5 bg-background p-6 shadow-sm"
             >
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-savora-blue/10 text-savora-blue">
                 <Icon className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-base font-semibold text-savora-dark">
+                <h3 className="text-base font-semibold text-foreground">
                   {title}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-savora-dark/65">
+                <p className="mt-1.5 text-sm leading-relaxed text-foreground/65">
                   {description}
                 </p>
               </div>

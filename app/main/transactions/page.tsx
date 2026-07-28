@@ -4,8 +4,8 @@ import { WalletIcon } from "@/components/icons";
 export default function TransactionsPage() {
   return (
     <div className="flex flex-1 flex-col">
-      <h1 className="text-2xl font-bold text-savora-dark">Transactions</h1>
-      <p className="mt-1 text-sm text-savora-dark/60">
+      <h1 className="text-2xl font-bold text-foreground">Transactions</h1>
+      <p className="mt-1 text-sm text-foreground/60">
         Every deposit and payout, recorded on-chain.
       </p>
 

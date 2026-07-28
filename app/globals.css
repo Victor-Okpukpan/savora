@@ -1,10 +1,20 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --savora-blue: #2562eb;
   --savora-green: #10b981;
   --savora-dark: #111827;
   --savora-white: #ffffff;
+
+  --background: var(--savora-white);
+  --foreground: var(--savora-dark);
+}
+
+.dark {
+  --background: var(--savora-dark);
+  --foreground: var(--savora-white);
 }
 
 @theme inline {
@@ -12,11 +22,16 @@
   --color-savora-green: var(--savora-green);
   --color-savora-dark: var(--savora-dark);
   --color-savora-white: var(--savora-white);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
 }
 
 body {
   font-family: var(--font-poppins), sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .text-gradient {

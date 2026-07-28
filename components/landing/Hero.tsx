@@ -2,20 +2,20 @@ import { ArrowRightIcon } from "@/components/icons";
 
 export function Hero() {
   return (
-    <section className="overflow-hidden bg-savora-white">
+    <section className="overflow-hidden bg-background">
       <div className="mx-auto grid max-w-6xl items-center gap-16 px-6 py-20 md:grid-cols-2 md:py-28">
         <div>
           <span className="inline-flex items-center rounded-full bg-savora-blue/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-savora-blue">
             Decentralized Community Savings
           </span>
 
-          <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-savora-dark sm:text-5xl">
+          <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl">
             Save Together.
             <br />
             <span className="text-gradient">Grow Together.</span>
           </h1>
 
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-savora-dark/70">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-foreground/70">
             Savora brings transparency, security and trust to traditional
             community savings groups &mdash; like Ajo and Esusu &mdash; through
             blockchain technology. Smart contracts automate contributions and
@@ -32,7 +32,7 @@ export function Hero() {
             </a>
             <a
               href="#features"
-              className="inline-flex items-center gap-2 rounded-full border border-savora-dark/15 px-6 py-3.5 text-sm font-semibold text-savora-dark transition-colors hover:border-savora-dark/30"
+              className="inline-flex items-center gap-2 rounded-full border border-foreground/15 px-6 py-3.5 text-sm font-semibold text-foreground transition-colors hover:border-foreground/30"
             >
               Explore Features
             </a>

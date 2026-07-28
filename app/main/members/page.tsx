@@ -4,8 +4,8 @@ import { UserIcon } from "@/components/icons";
 export default function MembersPage() {
   return (
     <div className="flex flex-1 flex-col">
-      <h1 className="text-2xl font-bold text-savora-dark">Members</h1>
-      <p className="mt-1 text-sm text-savora-dark/60">
+      <h1 className="text-2xl font-bold text-foreground">Members</h1>
+      <p className="mt-1 text-sm text-foreground/60">
         People in your savings circles.
       </p>
 
