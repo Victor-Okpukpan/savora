@@ -1,4 +1,5 @@
 import { EmptyState } from "@/components/main/EmptyState";
+import { WalletGate } from "@/components/main/WalletGate";
 import { UserIcon } from "@/components/icons";
 
 export default function MembersPage() {
@@ -10,11 +11,16 @@ export default function MembersPage() {
       </p>
 
       <div className="mt-6 flex flex-1">
-        <EmptyState
-          icon={UserIcon}
-          title="No members yet"
-          description="Once you create or join a circle, you'll see fellow members here."
-        />
+        <WalletGate
+          title="Connect your wallet"
+          description="Connect your wallet to see the members of your savings circles."
+        >
+          <EmptyState
+            icon={UserIcon}
+            title="No members yet"
+            description="Once you create or join a circle, you'll see fellow members here."
+          />
+        </WalletGate>
       </div>
     </div>
   );

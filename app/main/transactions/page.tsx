@@ -1,4 +1,5 @@
 import { EmptyState } from "@/components/main/EmptyState";
+import { WalletGate } from "@/components/main/WalletGate";
 import { WalletIcon } from "@/components/icons";
 
 export default function TransactionsPage() {
@@ -10,11 +11,16 @@ export default function TransactionsPage() {
       </p>
 
       <div className="mt-6 flex flex-1">
-        <EmptyState
-          icon={WalletIcon}
-          title="No transactions yet"
-          description="On-chain contributions and payouts will appear here as they happen."
-        />
+        <WalletGate
+          title="Connect your wallet"
+          description="Connect your wallet to see your on-chain deposits and payouts."
+        >
+          <EmptyState
+            icon={WalletIcon}
+            title="No transactions yet"
+            description="On-chain contributions and payouts will appear here as they happen."
+          />
+        </WalletGate>
       </div>
     </div>
   );

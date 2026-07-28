@@ -1,4 +1,5 @@
 import { EmptyState } from "@/components/main/EmptyState";
+import { WalletGate } from "@/components/main/WalletGate";
 import { SettingsIcon } from "@/components/icons";
 
 export default function SettingsPage() {
@@ -10,11 +11,16 @@ export default function SettingsPage() {
       </p>
 
       <div className="mt-6 flex flex-1">
-        <EmptyState
-          icon={SettingsIcon}
-          title="Settings coming soon"
-          description="Wallet connection, notifications, and account preferences will live here."
-        />
+        <WalletGate
+          title="Connect your wallet"
+          description="Connect your wallet to manage your account settings."
+        >
+          <EmptyState
+            icon={SettingsIcon}
+            title="More settings coming soon"
+            description="Notifications and other account preferences will live here."
+          />
+        </WalletGate>
       </div>
     </div>
   );

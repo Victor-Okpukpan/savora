@@ -1,4 +1,5 @@
 import { EmptyState } from "@/components/main/EmptyState";
+import { WalletGate } from "@/components/main/WalletGate";
 import { AnalyticsIcon } from "@/components/icons";
 
 export default function AnalyticsPage() {
@@ -10,11 +11,16 @@ export default function AnalyticsPage() {
       </p>
 
       <div className="mt-6 flex flex-1">
-        <EmptyState
-          icon={AnalyticsIcon}
-          title="Nothing to analyze yet"
-          description="Your savings growth chart will appear here once you have contribution history."
-        />
+        <WalletGate
+          title="Connect your wallet"
+          description="Connect your wallet to see your savings growth over time."
+        >
+          <EmptyState
+            icon={AnalyticsIcon}
+            title="Nothing to analyze yet"
+            description="Your savings growth chart will appear here once you have contribution history."
+          />
+        </WalletGate>
       </div>
     </div>
   );

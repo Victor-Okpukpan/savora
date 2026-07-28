@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import {
   HomeIcon,
@@ -13,6 +14,13 @@ import {
   SettingsIcon,
 } from "@/components/icons";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
+// @stacks/connect touches browser globals at module scope, which breaks
+// server-side prerendering — load it client-only.
+const WalletConnect = dynamic(
+  () => import("@/components/main/WalletConnect").then((m) => m.WalletConnect),
+  { ssr: false, loading: () => <div className="h-8 w-full rounded-lg bg-foreground/5" /> }
+);
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: HomeIcon },
@@ -55,9 +63,14 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="flex items-center justify-between border-t border-foreground/5 px-2 pt-4">
-        <span className="text-xs text-foreground/50">Theme</span>
-        <ThemeToggle />
+      <div className="flex flex-col gap-3 border-t border-foreground/5 px-2 pt-4">
+        <div className="flex items-center justify-between">
+          <span className="inline-flex items-center rounded-full bg-savora-green/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-savora-green">
+            Testnet
+          </span>
+          <ThemeToggle />
+        </div>
+        <WalletConnect />
       </div>
     </aside>
   );
