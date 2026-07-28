@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 
-// @stacks/connect touches browser globals at module scope, which breaks
+// sats-connect touches browser globals at module scope, which breaks
 // server-side prerendering — load it client-only (same fix as WalletConnect).
 const WalletGateContent = dynamic(() => import("./WalletGateContent"), {
   ssr: false,

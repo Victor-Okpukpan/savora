@@ -15,7 +15,7 @@ import {
 } from "@/components/icons";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-// @stacks/connect touches browser globals at module scope, which breaks
+// sats-connect touches browser globals at module scope, which breaks
 // server-side prerendering — load it client-only.
 const WalletConnect = dynamic(
   () => import("@/components/main/WalletConnect").then((m) => m.WalletConnect),

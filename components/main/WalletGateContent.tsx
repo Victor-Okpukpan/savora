@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import type { ReactNode } from "react";
 import { walletStore, connectWallet } from "@/lib/wallet";
 import { WalletIcon } from "@/components/icons";
@@ -17,24 +17,14 @@ export default function WalletGateContent({
   description,
   children,
 }: WalletGateContentProps) {
-  const { connected } = useSyncExternalStore(
+  const { connected, connecting } = useSyncExternalStore(
     walletStore.subscribe,
     walletStore.getSnapshot,
     walletStore.getServerSnapshot
   );
-  const [pending, setPending] = useState(false);
 
   if (connected) {
     return <>{children}</>;
-  }
-
-  async function handleConnect() {
-    setPending(true);
-    try {
-      await connectWallet();
-    } finally {
-      setPending(false);
-    }
   }
 
   return (
@@ -43,9 +33,9 @@ export default function WalletGateContent({
       title={title}
       description={description}
       action={{
-        label: pending ? "Connecting…" : "Connect Wallet",
-        onClick: handleConnect,
-        pending,
+        label: connecting ? "Connecting…" : "Connect Wallet",
+        onClick: connectWallet,
+        pending: connecting,
       }}
     />
   );

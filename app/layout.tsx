@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeScript } from "@/components/ThemeScript";
+import { Toaster } from "@/components/Toaster";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <ThemeScript />
         {children}
+        <Toaster />
       </body>
     </html>
   );
