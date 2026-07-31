@@ -249,6 +249,20 @@ export function CloseIcon({ className = base }: IconProps) {
   );
 }
 
+export function LinkIcon({ className = "h-4 w-4" }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M9.5 14.5l5-5M8 16l-1.5 1.5a3 3 0 01-4.24-4.24L4 11.5M16 8l1.74-1.74a3 3 0 014.24 4.24L20.5 12"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function ArrowRightIcon({ className = "h-4 w-4" }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">

@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Clarinet project — has its own lint/test tooling, not part of the Next.js app.
+    "clarity/**",
   ]),
 ]);
 

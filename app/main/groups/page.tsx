@@ -1,6 +1,5 @@
-import { EmptyState } from "@/components/main/EmptyState";
 import { WalletGate } from "@/components/main/WalletGate";
-import { GroupsIcon } from "@/components/icons";
+import { GroupsGate } from "@/components/main/GroupsGate";
 
 export default function GroupsPage() {
   return (
@@ -15,11 +14,7 @@ export default function GroupsPage() {
           title="Connect your wallet"
           description="Connect your wallet to see the savings circles you've created or joined."
         >
-          <EmptyState
-            icon={GroupsIcon}
-            title="No groups yet"
-            description="Create a savings circle or join one with an invite once this feature is live."
-          />
+          <GroupsGate />
         </WalletGate>
       </div>
     </div>
