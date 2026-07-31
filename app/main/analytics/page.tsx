@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { WalletGate } from "@/components/main/WalletGate";
 import { AnalyticsGate } from "@/components/main/AnalyticsGate";
+
+export const metadata: Metadata = { title: "Analytics" };
 
 export default function AnalyticsPage() {
   return (

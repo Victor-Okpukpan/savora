@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import { WalletGate } from "@/components/main/WalletGate";
 import { GroupsGate } from "@/components/main/GroupsGate";
+
+export const metadata: Metadata = { title: "My Groups" };
 
 export default function GroupsPage() {
   return (

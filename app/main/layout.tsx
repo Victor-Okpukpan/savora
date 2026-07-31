@@ -1,5 +1,17 @@
+import type { Metadata } from "next";
 import { Sidebar } from "@/components/main/Sidebar";
 import { MobileNav } from "@/components/main/MobileNav";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Savora App",
+    default: "Savora App",
+  },
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function MainLayout({
   children,
