@@ -247,3 +247,77 @@ export async function hasContributedThisRound(
   );
   return Boolean(json.value);
 }
+
+export type MyCircle = { circle: Circle; info: MemberInfo };
+
+// Circle ids are just 0..count-1 with no separate index, so "which circles is
+// this address in" means probing every circle and keeping the ones with
+// member-info. Fine at today's scale; would need a real index if this list
+// ever gets large.
+export async function getMyCircles(address: string): Promise<MyCircle[]> {
+  const count = await getCircleCount(address);
+  const found: MyCircle[] = [];
+  for (let id = 0; id < count; id++) {
+    const info = await getMemberInfo(id, address, address);
+    if (!info) continue;
+    const circle = await getCircle(id, address);
+    if (circle) found.push({ circle, info });
+  }
+  return found;
+}
+
+// STX balance actually sitting in the connected wallet (not funds currently
+// held in a circle's escrow -- those only move on payout).
+export async function getWalletBalance(address: string): Promise<number> {
+  const res = await fetch(`${TESTNET_API_BASE}/extended/v1/address/${address}/balances`);
+  if (!res.ok) throw new Error("Failed to fetch wallet balance.");
+  const data = await res.json();
+  return Number(data.stx.balance);
+}
+
+export type ContractTransaction = {
+  txid: string;
+  functionName: string;
+  circleId: number | null;
+  status: string;
+  blockTimeIso: string;
+};
+
+type RawFunctionArg = { name: string; repr: string };
+type RawContractCallTx = {
+  tx_id: string;
+  tx_type: string;
+  tx_status: string;
+  block_time_iso: string;
+  contract_call?: {
+    contract_id: string;
+    function_name: string;
+    function_args?: RawFunctionArg[];
+  };
+};
+
+// The address-transactions endpoint returns everything that address has ever
+// sent, so this filters down to calls against our own contract.
+export async function getContractTransactions(address: string): Promise<ContractTransaction[]> {
+  const { address: contractAddress, name: contractName } = requireContract();
+  const contractId = `${contractAddress}.${contractName}`;
+  const res = await fetch(
+    `${TESTNET_API_BASE}/extended/v1/address/${address}/transactions?limit=50`
+  );
+  if (!res.ok) throw new Error("Failed to fetch transaction history.");
+  const data = await res.json();
+  const results: RawContractCallTx[] = data.results ?? [];
+
+  return results
+    .filter((tx) => tx.tx_type === "contract_call" && tx.contract_call?.contract_id === contractId)
+    .map((tx) => {
+      const circleIdArg = tx.contract_call?.function_args?.find((arg) => arg.name === "circle-id");
+      return {
+        txid: tx.tx_id,
+        functionName: tx.contract_call!.function_name,
+        circleId: circleIdArg ? Number(circleIdArg.repr.replace("u", "")) : null,
+        status: tx.tx_status,
+        blockTimeIso: tx.block_time_iso,
+      };
+    });
+}

@@ -1,6 +1,5 @@
-import { EmptyState } from "@/components/main/EmptyState";
 import { WalletGate } from "@/components/main/WalletGate";
-import { GroupsIcon } from "@/components/icons";
+import { DashboardGate } from "@/components/main/DashboardGate";
 
 export default function DashboardPage() {
   return (
@@ -10,29 +9,12 @@ export default function DashboardPage() {
         Here&rsquo;s what&rsquo;s happening with your savings.
       </p>
 
-      <div className="mt-6 flex flex-1 flex-col">
+      <div className="mt-6 flex flex-1">
         <WalletGate
           title="Connect your wallet"
           description="Connect your wallet to see your balance, groups, and savings activity."
         >
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-foreground/5 p-5">
-              <p className="text-xs text-foreground/50">Total Balance</p>
-              <p className="mt-1 text-2xl font-bold text-foreground">₦0.00</p>
-            </div>
-            <div className="rounded-2xl border border-foreground/5 p-5">
-              <p className="text-xs text-foreground/50">Active Groups</p>
-              <p className="mt-1 text-2xl font-bold text-foreground">0</p>
-            </div>
-          </div>
-
-          <div className="mt-6 flex flex-1">
-            <EmptyState
-              icon={GroupsIcon}
-              title="No savings circles yet"
-              description="Create or join an Ajo-style savings circle here."
-            />
-          </div>
+          <DashboardGate />
         </WalletGate>
       </div>
     </div>

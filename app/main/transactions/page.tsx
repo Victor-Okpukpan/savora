@@ -1,6 +1,5 @@
-import { EmptyState } from "@/components/main/EmptyState";
 import { WalletGate } from "@/components/main/WalletGate";
-import { WalletIcon } from "@/components/icons";
+import { TransactionsGate } from "@/components/main/TransactionsGate";
 
 export default function TransactionsPage() {
   return (
@@ -15,11 +14,7 @@ export default function TransactionsPage() {
           title="Connect your wallet"
           description="Connect your wallet to see your on-chain deposits and payouts."
         >
-          <EmptyState
-            icon={WalletIcon}
-            title="No transactions yet"
-            description="On-chain contributions and payouts will appear here as they happen."
-          />
+          <TransactionsGate />
         </WalletGate>
       </div>
     </div>

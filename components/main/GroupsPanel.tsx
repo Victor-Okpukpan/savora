@@ -5,22 +5,17 @@ import { useSyncExternalStore } from "react";
 import { useSearchParams } from "next/navigation";
 import { walletStore } from "@/lib/wallet";
 import {
-  getCircle,
-  getCircleCount,
-  getMemberInfo,
+  getMyCircles,
   isContractDeployed,
   joinCircleTx,
   waitForTxConfirmation,
-  type Circle,
-  type MemberInfo,
+  type MyCircle,
 } from "@/lib/contract";
 import { toast } from "@/lib/toast";
 import { CreateCircleForm } from "@/components/main/CreateCircleForm";
 import { CircleCard } from "@/components/main/CircleCard";
 import { EmptyState } from "@/components/main/EmptyState";
 import { GroupsIcon } from "@/components/icons";
-
-type MyCircle = { circle: Circle; info: MemberInfo };
 
 export default function GroupsPanel() {
   const { address } = useSyncExternalStore(
@@ -39,15 +34,7 @@ export default function GroupsPanel() {
     if (!address) return;
     setCircles(null);
     try {
-      const count = await getCircleCount(address);
-      const found: MyCircle[] = [];
-      for (let id = 0; id < count; id++) {
-        const info = await getMemberInfo(id, address, address);
-        if (!info) continue;
-        const circle = await getCircle(id, address);
-        if (circle) found.push({ circle, info });
-      }
-      setCircles(found);
+      setCircles(await getMyCircles(address));
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Failed to load your circles.");
       setCircles([]);

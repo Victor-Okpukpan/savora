@@ -5,7 +5,6 @@ import {
   WalletIcon,
   UserIcon,
   AnalyticsIcon,
-  SettingsIcon,
 } from "@/components/icons";
 
 export const navItems = [
@@ -15,5 +14,4 @@ export const navItems = [
   { href: "/transactions", label: "Transactions", icon: WalletIcon },
   { href: "/members", label: "Members", icon: UserIcon },
   { href: "/analytics", label: "Analytics", icon: AnalyticsIcon },
-  { href: "/settings", label: "Settings", icon: SettingsIcon },
 ];
