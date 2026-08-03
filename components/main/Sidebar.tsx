@@ -13,15 +13,19 @@ const WalletConnect = dynamic(
   { ssr: false, loading: () => <div className="h-8 w-full rounded-lg bg-foreground/5" /> }
 );
 
-export function Sidebar() {
+type SidebarProps = {
+  basePath: string;
+};
+
+export function Sidebar({ basePath }: SidebarProps) {
   return (
     <aside className="hidden w-64 shrink-0 flex-col border-r border-foreground/5 bg-background px-4 py-6 sm:flex">
-      <Link href="/" className="flex items-center gap-2.5 px-2">
+      <Link href={basePath || "/"} className="flex items-center gap-2.5 px-2">
         <Image src="/logo.png" alt="Savora" width={30} height={30} />
         <span className="text-base font-bold text-foreground">SAVORA</span>
       </Link>
 
-      <NavLinks className="mt-8 flex-1" />
+      <NavLinks basePath={basePath} className="mt-8 flex-1" />
 
       <div className="flex flex-col gap-3 border-t border-foreground/5 px-2 pt-4">
         <div className="flex items-center justify-between">

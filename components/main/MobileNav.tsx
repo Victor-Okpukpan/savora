@@ -15,8 +15,13 @@ const WalletConnect = dynamic(
   { ssr: false, loading: () => <div className="h-8 w-full rounded-lg bg-foreground/5" /> }
 );
 
-export function MobileNav() {
+type MobileNavProps = {
+  basePath: string;
+};
+
+export function MobileNav({ basePath }: MobileNavProps) {
   const [open, setOpen] = useState(false);
+  const homeHref = basePath || "/";
 
   useEffect(() => {
     if (!open) return;
@@ -36,7 +41,7 @@ export function MobileNav() {
   return (
     <>
       <header className="sticky top-0 z-40 flex items-center justify-between border-b border-foreground/5 bg-background px-4 py-3 sm:hidden">
-        <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+        <Link href={homeHref} className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <Image src="/logo.png" alt="Savora" width={26} height={26} />
           <span className="text-sm font-bold text-foreground">SAVORA</span>
         </Link>
@@ -62,7 +67,7 @@ export function MobileNav() {
           <div className="absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col bg-background px-4 py-6 shadow-xl">
             <div className="flex items-center justify-between px-2">
               <Link
-                href="/"
+                href={homeHref}
                 className="flex items-center gap-2.5"
                 onClick={() => setOpen(false)}
               >
@@ -79,7 +84,7 @@ export function MobileNav() {
               </button>
             </div>
 
-            <NavLinks className="mt-8 flex-1" onNavigate={() => setOpen(false)} />
+            <NavLinks basePath={basePath} className="mt-8 flex-1" onNavigate={() => setOpen(false)} />
 
             <div className="flex flex-col gap-3 border-t border-foreground/5 px-2 pt-4">
               <div className="flex items-center justify-between">

@@ -3,23 +3,27 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navItems } from "@/components/main/nav-items";
+import { mainHref } from "@/lib/urls";
 
 type NavLinksProps = {
+  basePath: string;
   className?: string;
   onNavigate?: () => void;
 };
 
-export function NavLinks({ className = "", onNavigate }: NavLinksProps) {
+export function NavLinks({ basePath, className = "", onNavigate }: NavLinksProps) {
   const pathname = usePathname();
 
   return (
     <nav className={`flex flex-col gap-1 ${className}`}>
       {navItems.map(({ href, label, icon: Icon }) => {
-        const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
+        const resolvedHref = mainHref(basePath, href);
+        const isActive =
+          href === "/" ? pathname === resolvedHref : pathname.startsWith(resolvedHref);
         return (
           <Link
             key={href}
-            href={href}
+            href={resolvedHref}
             onClick={onNavigate}
             className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
               isActive
