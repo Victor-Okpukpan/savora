@@ -1,6 +1,5 @@
 "use client";
 
-import { request as satsRequest } from "sats-connect";
 import {
   Cl,
   cvToHex,
@@ -39,6 +38,10 @@ async function callContract(
   postConditions: PostCondition[] = []
 ): Promise<TxResult> {
   const { address, name } = requireContract();
+  // Dynamically imported for the same reason as lib/wallet.ts's
+  // connectWallet(): a single call-site chunk instead of duplicating
+  // sats-connect across every ssr:false boundary that pulls in this file.
+  const { request: satsRequest } = await import("sats-connect");
   const response = await satsRequest(
     "stx_callContract",
     {

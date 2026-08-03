@@ -1,6 +1,5 @@
 "use client";
 
-import { request as satsRequest, AddressPurpose } from "sats-connect";
 import { toast } from "@/lib/toast";
 
 export type WalletState = {
@@ -89,6 +88,13 @@ export async function connectWallet() {
     if (!hasXverse()) {
       throw new Error("No Xverse wallet found. Install the Xverse extension and try again.");
     }
+
+    // Imported dynamically (rather than statically at the top of this file)
+    // so that sats-connect — which touches browser globals at module scope —
+    // is only ever bundled and loaded from this one call site, instead of
+    // being duplicated across every separate ssr:false chunk that pulls in
+    // this file, which was causing Turbopack chunk-loading errors.
+    const { request: satsRequest, AddressPurpose } = await import("sats-connect");
 
     // `wallet_connect` is the actual permission-granting operation — unlike
     // `stx_getAddresses`, which just returns "Access denied" if the origin
