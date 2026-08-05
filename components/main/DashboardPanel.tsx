@@ -55,7 +55,7 @@ export default function DashboardPanel() {
       <EmptyState
         icon={GroupsIcon}
         title="Not deployed yet"
-        description="The savings circle contract hasn't been deployed to testnet yet. Once it is, your dashboard will show up here."
+        description="The savings circle contract hasn't been deployed yet. Once it is, your dashboard will show up here."
       />
     );
   }

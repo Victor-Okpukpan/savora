@@ -9,6 +9,7 @@ import {
   postConditionToHex,
 } from "@stacks/transactions";
 import type { ClarityValue, PostCondition } from "@stacks/transactions";
+import { STACKS_API_BASE, STACKS_NETWORK } from "@/lib/network";
 
 // Set once the contract is deployed, e.g. "ST1ABC....savings-circle".
 const CONTRACT_PRINCIPAL = process.env.NEXT_PUBLIC_SAVINGS_CIRCLE_CONTRACT ?? "";
@@ -99,8 +100,6 @@ export function endCircleTx(circleId: number) {
   return callContract("end-circle", [Cl.uint(circleId)]);
 }
 
-const TESTNET_API_BASE = "https://api.testnet.hiro.so";
-
 // `stx_callContract` resolves as soon as the wallet *submits* the
 // transaction, not once it's mined -- callers need to wait for actual
 // confirmation before re-reading contract state, or they'll just see stale
@@ -111,7 +110,7 @@ export async function waitForTxConfirmation(
 ): Promise<void> {
   const start = Date.now();
   while (Date.now() - start < timeoutMs) {
-    const res = await fetch(`${TESTNET_API_BASE}/extended/v1/tx/${txid}`);
+    const res = await fetch(`${STACKS_API_BASE}/extended/v1/tx/${txid}`);
     if (res.ok) {
       const data = await res.json();
       if (data.tx_status === "success") return;
@@ -127,7 +126,7 @@ export async function waitForTxConfirmation(
 // Bitcoin block height as seen by the network -- the same clock the contract
 // uses for `next-round-at`, so the UI can show "opens in ~N days" accurately.
 export async function getCurrentBurnBlockHeight(): Promise<number> {
-  const res = await fetch(`${TESTNET_API_BASE}/v2/info`);
+  const res = await fetch(`${STACKS_API_BASE}/v2/info`);
   if (!res.ok) throw new Error("Failed to fetch current block height.");
   const data = await res.json();
   return Number(data.burn_block_height);
@@ -143,7 +142,7 @@ async function readOnly(functionName: string, functionArgs: ClarityValue[], send
     functionName,
     functionArgs,
     senderAddress,
-    network: "testnet",
+    network: STACKS_NETWORK,
   });
   return cvToJSON(result);
 }
@@ -272,7 +271,7 @@ export async function getMyCircles(address: string): Promise<MyCircle[]> {
 // STX balance actually sitting in the connected wallet (not funds currently
 // held in a circle's escrow -- those only move on payout).
 export async function getWalletBalance(address: string): Promise<number> {
-  const res = await fetch(`${TESTNET_API_BASE}/extended/v1/address/${address}/balances`);
+  const res = await fetch(`${STACKS_API_BASE}/extended/v1/address/${address}/balances`);
   if (!res.ok) throw new Error("Failed to fetch wallet balance.");
   const data = await res.json();
   return Number(data.stx.balance);
@@ -305,7 +304,7 @@ export async function getContractTransactions(address: string): Promise<Contract
   const { address: contractAddress, name: contractName } = requireContract();
   const contractId = `${contractAddress}.${contractName}`;
   const res = await fetch(
-    `${TESTNET_API_BASE}/extended/v1/address/${address}/transactions?limit=50`
+    `${STACKS_API_BASE}/extended/v1/address/${address}/transactions?limit=50`
   );
   if (!res.ok) throw new Error("Failed to fetch transaction history.");
   const data = await res.json();

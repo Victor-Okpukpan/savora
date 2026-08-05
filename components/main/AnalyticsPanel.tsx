@@ -41,7 +41,7 @@ export default function AnalyticsPanel() {
       <EmptyState
         icon={AnalyticsIcon}
         title="Not deployed yet"
-        description="The savings circle contract hasn't been deployed to testnet yet. Once it is, your analytics will show up here."
+        description="The savings circle contract hasn't been deployed yet. Once it is, your analytics will show up here."
       />
     );
   }

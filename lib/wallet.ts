@@ -1,6 +1,7 @@
 "use client";
 
 import { toast } from "@/lib/toast";
+import { STACKS_NETWORK, NETWORK_LABEL } from "@/lib/network";
 
 export type WalletState = {
   connected: boolean;
@@ -110,8 +111,8 @@ export async function connectWallet() {
       throw new Error(response.error?.message ?? "Wallet connection was rejected.");
     }
 
-    if (response.result.network.stacks.name !== "testnet") {
-      throw new Error("Your wallet is set to Mainnet. Switch Xverse to Testnet and try again.");
+    if (response.result.network.stacks.name !== STACKS_NETWORK) {
+      throw new Error(`Your wallet isn't set to ${NETWORK_LABEL}. Switch Xverse to ${NETWORK_LABEL} and try again.`);
     }
 
     const address =

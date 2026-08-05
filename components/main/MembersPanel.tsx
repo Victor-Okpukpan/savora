@@ -38,7 +38,7 @@ export default function MembersPanel() {
       <EmptyState
         icon={UserIcon}
         title="Not deployed yet"
-        description="The savings circle contract hasn't been deployed to testnet yet. Once it is, members will show up here."
+        description="The savings circle contract hasn't been deployed yet. Once it is, members will show up here."
       />
     );
   }

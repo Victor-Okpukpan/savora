@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { MenuIcon, CloseIcon } from "@/components/icons";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { NavLinks } from "@/components/main/NavLinks";
+import { NETWORK_LABEL, STACKS_NETWORK } from "@/lib/network";
 
 // sats-connect touches browser globals at module scope, which breaks
 // server-side prerendering — load it client-only.
@@ -88,8 +89,14 @@ export function MobileNav({ basePath }: MobileNavProps) {
 
             <div className="flex flex-col gap-3 border-t border-foreground/5 px-2 pt-4">
               <div className="flex items-center justify-between">
-                <span className="inline-flex items-center rounded-full bg-savora-green/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-savora-green">
-                  Testnet
+                <span
+                  className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
+                    STACKS_NETWORK === "mainnet"
+                      ? "bg-savora-blue/10 text-savora-blue"
+                      : "bg-savora-green/10 text-savora-green"
+                  }`}
+                >
+                  {NETWORK_LABEL}
                 </span>
                 <ThemeToggle />
               </div>

@@ -9,6 +9,7 @@ import {
   type ContractTransaction,
 } from "@/lib/contract";
 import { toast } from "@/lib/toast";
+import { explorerTxUrl } from "@/lib/network";
 import { EmptyState } from "@/components/main/EmptyState";
 import { WalletIcon } from "@/components/icons";
 
@@ -64,7 +65,7 @@ export default function TransactionsPanel() {
       <EmptyState
         icon={WalletIcon}
         title="Not deployed yet"
-        description="The savings circle contract hasn't been deployed to testnet yet. Once it is, your transactions will show up here."
+        description="The savings circle contract hasn't been deployed yet. Once it is, your transactions will show up here."
       />
     );
   }
@@ -92,7 +93,7 @@ export default function TransactionsPanel() {
       {transactions.map((tx) => (
         <a
           key={tx.txid}
-          href={`https://explorer.hiro.so/txid/${tx.txid}?chain=testnet`}
+          href={explorerTxUrl(tx.txid)}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-between rounded-2xl border border-foreground/10 px-5 py-3.5 text-sm transition-colors hover:border-foreground/20"

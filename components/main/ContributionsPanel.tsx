@@ -58,7 +58,7 @@ export default function ContributionsPanel() {
       <EmptyState
         icon={ContributionsIcon}
         title="Not deployed yet"
-        description="The savings circle contract hasn't been deployed to testnet yet. Once it is, your contributions will show up here."
+        description="The savings circle contract hasn't been deployed yet. Once it is, your contributions will show up here."
       />
     );
   }
