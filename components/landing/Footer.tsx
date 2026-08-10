@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { XIcon } from "@/components/icons";
 
 const columns = [
   {
@@ -25,6 +26,15 @@ export function Footer() {
               Save together. Grow together. Decentralized community savings,
               powered by smart contracts on Stacks.
             </p>
+            <a
+              href="https://x.com/Savora_HQ"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Savora on X"
+              className="mt-4 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors hover:border-white/20 hover:text-white"
+            >
+              <XIcon className="h-4 w-4" />
+            </a>
           </div>
 
           {columns.map((column) => (
